@@ -23,6 +23,10 @@ export function TaiXiu() {
   const [isSpinning, setIsSpinning] = useState(false);
   const [placedBets, setPlacedBets] = useState<Record<string, any>>({});
   const [sessionOutcome, setSessionOutcome] = useState<Record<string, { net: number; bets: any[] }>>({});
+  const [totalTai, setTotalTai] = useState<number>(0);
+  const [totalXiu, setTotalXiu] = useState<number>(0);
+  const [userBetTai, setUserBetTai] = useState<number>(0);
+  const [userBetXiu, setUserBetXiu] = useState<number>(0);
 
   const quickAmounts = [1000, 5000, 10000, 50000];
   // balance comes from UserContext
@@ -104,6 +108,47 @@ export function TaiXiu() {
         } else {
           setLastResult(null);
           setResultSessionId(null);
+        }
+
+        // nếu có phiên active thì lấy tổng cược cho tai/xiu và cược của người dùng
+        if (active) {
+          try {
+            const apiMod = await import('../api');
+            // lấy danh sách cược của phiên
+            try {
+              const full = await apiMod.api.sessions.get(active._id);
+              const bets = full.bets || [];
+              const tai = bets.filter((b: any) => b.choice === 'tai').reduce((s: number, b: any) => s + (b.amount || 0), 0);
+              const xiu = bets.filter((b: any) => b.choice === 'xiu').reduce((s: number, b: any) => s + (b.amount || 0), 0);
+              setTotalTai(tai);
+              setTotalXiu(xiu);
+            } catch (e) {
+              setTotalTai(0);
+              setTotalXiu(0);
+            }
+
+            // lấy cược của người dùng cho phiên (nếu đăng nhập)
+            try {
+              if (apiMod.api.tx && apiMod.api.tx.me) {
+                const me = await apiMod.api.tx.me();
+                const myBets = (me.bets || []).filter((b: any) => String(b.session) === String(active._id));
+                const myTai = myBets.filter((b: any) => b.choice === 'tai').reduce((s: number, b: any) => s + (b.amount || 0), 0);
+                const myXiu = myBets.filter((b: any) => b.choice === 'xiu').reduce((s: number, b: any) => s + (b.amount || 0), 0);
+                setUserBetTai(myTai);
+                setUserBetXiu(myXiu);
+              }
+            } catch (e) {
+              setUserBetTai(0);
+              setUserBetXiu(0);
+            }
+          } catch (e) {
+            // ignore
+          }
+        } else {
+          setTotalTai(0);
+          setTotalXiu(0);
+          setUserBetTai(0);
+          setUserBetXiu(0);
         }
       } catch (err) {
         // ignore
@@ -318,6 +363,20 @@ export function TaiXiu() {
                 >
                   XỈU (3-10)
                 </button>
+              </div>
+
+              {/* Display current user's bet and total bets for Tai / Xiu */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="p-3 rounded-lg bg-white/5 text-center">
+                  <div className="text-sm text-gray-300">TÀI</div>
+                  <div className="text-lg font-bold text-green-300">Bạn: {userBetTai ? userBetTai.toLocaleString('vi-VN') : '0'} VNĐ</div>
+                  <div className="text-sm text-gray-400">Tổng: {totalTai ? totalTai.toLocaleString('vi-VN') : '0'} VNĐ</div>
+                </div>
+                <div className="p-3 rounded-lg bg-white/5 text-center">
+                  <div className="text-sm text-gray-300">XỈU</div>
+                  <div className="text-lg font-bold text-red-300">Bạn: {userBetXiu ? userBetXiu.toLocaleString('vi-VN') : '0'} VNĐ</div>
+                  <div className="text-sm text-gray-400">Tổng: {totalXiu ? totalXiu.toLocaleString('vi-VN') : '0'} VNĐ</div>
+                </div>
               </div>
 
               {/* Total Points */}

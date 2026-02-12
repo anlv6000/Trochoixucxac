@@ -1,5 +1,5 @@
 // api.ts
-const BASE = 'http://localhost:4000/api';
+const BASE = 'https://ctechlab-e.io.vn/api';
 
 async function request(path: string, opts: any = {}) {
   const res = await fetch(BASE + path, opts);
