@@ -49,36 +49,8 @@ export function Home() {
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Main Features */}
-      <div className="grid md:grid-cols-3 gap-6 mb-12">
-        <Link
-          to="/deposit"
-          className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-blue-600 to-blue-800 p-8 hover:shadow-2xl hover:shadow-blue-500/50 transition-all transform hover:scale-105"
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-          <div className="relative z-10">
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white/30 transition-all">
-              <CreditCard className="w-8 h-8" />
-            </div>
-            <h3 className="text-2xl font-bold mb-2">Nạp tiền</h3>
-            <p className="text-gray-200">Nạp tiền nhanh chóng qua ATM, Momo, thẻ cào</p>
-          </div>
-        </Link>
-
-        <Link
-          to="/withdraw"
-          className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-orange-600 to-red-600 p-8 hover:shadow-2xl hover:shadow-orange-500/50 transition-all transform hover:scale-105"
-        >
-          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
-          <div className="relative z-10">
-            <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-4 group-hover:bg-white/30 transition-all">
-              <Wallet className="w-8 h-8" />
-            </div>
-            <h3 className="text-2xl font-bold mb-2">Rút tiền</h3>
-            <p className="text-gray-200">Rút tiền nhanh trong vòng 5 phút</p>
-          </div>
-        </Link>
-
+      {/* Main Features (kept only Lucky Wheel) */}
+      <div className="grid md:grid-cols-1 gap-6 mb-12">
         <Link
           to="/lucky-wheel"
           className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 to-pink-600 p-8 hover:shadow-2xl hover:shadow-purple-500/50 transition-all transform hover:scale-105"

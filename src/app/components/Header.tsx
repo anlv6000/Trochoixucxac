@@ -49,23 +49,21 @@ export function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-6">
             {isAuthenticated && (
-              <>
-                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full shadow-lg shadow-green-500/50">
-                  <Wallet className="w-4 h-4" />
-                  <span className="font-bold">{balance.toLocaleString('vi-VN')} VNĐ</span>
-                </div>
-                <Link to="/deposit" className="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/50 hover:shadow-blue-500/70">Nạp tiền</Link>
-                <Link to="/withdraw" className="px-4 py-2 rounded-full bg-orange-600 hover:bg-orange-700 transition-all shadow-lg shadow-orange-500/50 hover:shadow-orange-500/70">Rút tiền</Link>
-                <Link to="/lucky-wheel" className="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70">Vòng quay may mắn</Link>
-                <Link to="/profile" className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-all">
-                  <img src={user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user?.username || 'player')}`} alt="avatar" className="w-6 h-6 rounded-full" />
-                </Link>
-                <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 transition-all shadow-lg shadow-red-500/50 hover:shadow-red-500/70">
-                  <LogOut className="w-4 h-4" />
-                  Đăng xuất
-                </button>
-              </>
-            )}
+                <>
+                  <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full shadow-lg shadow-green-500/50">
+                    <Wallet className="w-4 h-4" />
+                    <span className="font-bold">{balance.toLocaleString('vi-VN')} VNĐ</span>
+                  </div>
+                  <Link to="/lucky-wheel" className="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/50 hover:shadow-purple-500/70">Vòng quay may mắn</Link>
+                  <Link to="/profile" className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-all">
+                    <img src={user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user?.username || 'player')}`} alt="avatar" className="w-6 h-6 rounded-full" />
+                  </Link>
+                  <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 rounded-full bg-red-600 hover:bg-red-700 transition-all shadow-lg shadow-red-500/50 hover:shadow-red-500/70">
+                    <LogOut className="w-4 h-4" />
+                    Đăng xuất
+                  </button>
+                </>
+              )}
             {!isAuthenticated && (
               <>
                 <Link to="/login" className="px-6 py-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-all">Đăng nhập</Link>
@@ -92,8 +90,6 @@ export function Header() {
                   <Wallet className="w-4 h-4" />
                   <span className="font-bold">{balance.toLocaleString('vi-VN')} VNĐ</span>
                 </div>
-                <Link to="/deposit" className="px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/50 text-center" onClick={() => setMobileMenuOpen(false)}>Nạp tiền</Link>
-                <Link to="/withdraw" className="px-4 py-2 rounded-full bg-orange-600 hover:bg-orange-700 transition-all shadow-lg shadow-orange-500/50 text-center" onClick={() => setMobileMenuOpen(false)}>Rút tiền</Link>
                 <Link to="/lucky-wheel" className="px-4 py-2 rounded-full bg-purple-600 hover:bg-purple-700 transition-all shadow-lg shadow-purple-500/50 text-center" onClick={() => setMobileMenuOpen(false)}>Vòng quay may mắn</Link>
                 <Link to="/profile" className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-gray-700 hover:bg-gray-600 transition-all" onClick={() => setMobileMenuOpen(false)}>
                   <img src={user?.avatar || `https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user?.username || 'player')}`} alt="avatar" className="w-6 h-6 rounded-full" />
