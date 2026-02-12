@@ -1,0 +1,9 @@
+[
+  {
+    "gameType": "tai_xiu",
+    "startAt": {"$date": "2026-02-12T00:00:00.000Z"},
+    "endAt": {"$date": "2026-02-12T00:00:30.000Z"},
+    "status": "settled",
+    "result": {"dice": [2,4,5], "sum": 11}
+  }
+]

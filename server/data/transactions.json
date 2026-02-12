@@ -1,0 +1,8 @@
+[
+  {
+    "user": "<userObjectId>",
+    "type": "deposit",
+    "amount": 1000,
+    "meta": null
+  }
+]

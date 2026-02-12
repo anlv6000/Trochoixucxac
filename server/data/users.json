@@ -1,0 +1,12 @@
+[
+  {
+    "username": "alice",
+    "passwordHash": "<placeholder-password-hash>",
+    "balance": 1000
+  },
+  {
+    "username": "bob",
+    "passwordHash": "<placeholder-password-hash>",
+    "balance": 500
+  }
+]

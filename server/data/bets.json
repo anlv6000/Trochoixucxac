@@ -1,0 +1,10 @@
+[
+  {
+    "user": "<userObjectId>",
+    "session": "<sessionObjectId>",
+    "choice": "tai",
+    "amount": 100,
+    "payout": 0,
+    "status": "lost"
+  }
+]
