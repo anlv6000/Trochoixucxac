@@ -1,5 +1,5 @@
 // api.ts
-const BASE = 'https://ctechlab-e.io.vn/api';
+export const BASE = 'http://localhost:4000/api';
 
 async function request(path: string, opts: any = {}) {
   const res = await fetch(BASE + path, opts);
@@ -33,6 +33,22 @@ export const api = {
   sessions: {
     list: () => request('/sessions'),
     get: (id: string) => request('/sessions/' + id)
+  },
+  blackjackrooms: {
+    list: () => request('/blackjackrooms'),
+    create: (data: any) => request('/blackjackrooms', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data) }),
+    join: (id: string) => request(`/blackjackrooms/${id}/join`, { method: 'POST', headers: { ...authHeader() } }),
+    get: (id: string) => request(`/blackjackrooms/${id}`),
+    leave: (id: string) => request(`/blackjackrooms/${id}/leave`, { method: 'POST', headers: { ...authHeader() } }),
+    ready: (id: string, data?: any) => request(`/blackjackrooms/${id}/ready`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data || {}) }),
+    unready: (id: string) => request(`/blackjackrooms/${id}/unready`, { method: 'POST', headers: { ...authHeader() } })
+    ,
+    action: (id: string, data: any) => request(`/blackjackrooms/${id}/action`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data || {}) })
+  },
+  bacayrooms: {
+    list: () => request('/bacayrooms'),
+    create: (data: any) => request('/bacayrooms', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data) }),
+    join: (id: string) => request(`/bacayrooms/${id}/join`, { method: 'POST', headers: { ...authHeader() } })
   },
   bets: {
     place: (sessionId: string, choice: string, amount: number, choiceValue?: number) => request('/bets', {

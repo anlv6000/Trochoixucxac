@@ -7,7 +7,7 @@ export function Home() {
       {/* Hero Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-purple-900 via-pink-900 to-orange-900 p-8 md:p-16 mb-12 shadow-2xl shadow-purple-500/30">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS1vcGFjaXR5PSIwLjEiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-20"></div>
-        
+
         <div className="relative z-10 text-center max-w-3xl mx-auto">
           <div className="inline-block mb-6">
             <div className="flex items-center gap-3 bg-black/30 backdrop-blur-sm px-6 py-3 rounded-full border border-yellow-400/50 shadow-lg shadow-yellow-500/30">
@@ -15,7 +15,7 @@ export function Home() {
               <span className="text-yellow-400 font-bold">Casino #1 Việt Nam</span>
             </div>
           </div>
-          
+
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
             <span className="bg-gradient-to-r from-yellow-300 via-yellow-400 to-orange-400 bg-clip-text text-transparent drop-shadow-lg">
               Chơi Tài Xỉu
@@ -23,11 +23,11 @@ export function Home() {
             <br />
             <span className="text-white drop-shadow-lg">Thắng lớn ngay hôm nay</span>
           </h1>
-          
+
           <p className="text-xl text-gray-200 mb-8 drop-shadow">
             Trải nghiệm casino trực tuyến hàng đầu với tỷ lệ thắng cao nhất
           </p>
-          
+
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               to="/login"
@@ -43,7 +43,7 @@ export function Home() {
             </Link>
           </div>
         </div>
-        
+
         {/* Decorative elements */}
         <div className="absolute top-10 left-10 w-20 h-20 bg-yellow-400/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-10 right-10 w-32 h-32 bg-pink-500/20 rounded-full blur-3xl"></div>
@@ -92,6 +92,43 @@ export function Home() {
             className="px-10 py-5 rounded-full bg-white text-green-700 hover:bg-gray-100 transition-all shadow-lg font-bold text-xl transform hover:scale-105"
           >
             Chơi ngay
+          </Link>
+        </div>
+      </div>
+      {/* Card Games Section */}
+      <div className="mb-12">
+        <h2 className="text-3xl font-bold mb-6 text-center">Game Bài</h2>
+        <div className="grid md:grid-cols-2 gap-6">
+          <Link
+            to="/blackjack"
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 to-indigo-800 p-8 hover:shadow-2xl hover:shadow-purple-500/50 transition-all transform hover:scale-105"
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div className="relative z-10">
+              <div className="text-5xl mb-4">🃏</div>
+              <h3 className="text-2xl font-bold mb-2">Blackjack Multiplayer</h3>
+              <p className="text-gray-200">Chơi cùng bạn bè! Tối đa 6 người một phòng</p>
+              <div className="mt-3 flex items-center gap-2 text-sm">
+                <span className="bg-white/20 px-3 py-1 rounded-full">👥 Nhiều người</span>
+                <span className="bg-white/20 px-3 py-1 rounded-full">🎮 Phòng riêng</span>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            to="/ba-cay"
+            className="group relative overflow-hidden rounded-2xl bg-gradient-to-br from-rose-600 to-pink-800 p-8 hover:shadow-2xl hover:shadow-rose-500/50 transition-all transform hover:scale-105"
+          >
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
+            <div className="relative z-10">
+              <div className="text-5xl mb-4">🎴</div>
+              <h3 className="text-2xl font-bold mb-2">Ba Cây (3 Cây)</h3>
+              <p className="text-gray-200">Tính điểm hàng đơn vị, cao nhất thắng</p>
+              <div className="mt-3 flex items-center gap-2 text-sm">
+                <span className="bg-white/20 px-3 py-1 rounded-full">🎯 Đơn giản</span>
+                <span className="bg-white/20 px-3 py-1 rounded-full">⚡ Nhanh</span>
+              </div>
+            </div>
           </Link>
         </div>
       </div>

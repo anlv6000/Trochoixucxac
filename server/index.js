@@ -15,6 +15,8 @@ const authRoutes = require('./routes/auth');
 const sessionsRoutes = require('./routes/sessions');
 const betsRoutes = require('./routes/bets');
 const txRoutes = require('./routes/transactions');
+const blackjackRoomsRoutesFactory = require('./routes/blackjackrooms');
+const baCayRoomsRoutes = require('./routes/bacayrooms');
 
 const app = express();
 app.use(cors());
@@ -23,11 +25,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://anlevan001:qielli2007@cluster0.02suo.mongodb.net/tai_xiu?retryWrites=true&w=majority';
 
-// mount routes
-app.use('/api/auth', authRoutes);
-app.use('/api/sessions', sessionsRoutes);
-app.use('/api/bets', betsRoutes);
-app.use('/api/tx', txRoutes);
+// routes are mounted after Socket.IO is created (below)
 
 // simple health
 app.get('/api/ping', (req, res) => res.json({ ok: true }));
@@ -123,7 +121,25 @@ async function startScheduler() {
 async function start() {
   await mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
   console.log('Connected to MongoDB', MONGO_URI);
-  app.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+  const server = require('http').createServer(app);
+  const { Server } = require('socket.io');
+  const io = new Server(server, { cors: { origin: '*' } });
+
+  // mount routes (pass io to routes that need it)
+  app.use('/api/auth', authRoutes);
+  app.use('/api/sessions', sessionsRoutes);
+  app.use('/api/bets', betsRoutes);
+  app.use('/api/tx', txRoutes);
+  app.use('/api/blackjackrooms', blackjackRoomsRoutesFactory(io));
+  app.use('/api/bacayrooms', baCayRoomsRoutes);
+
+  server.listen(PORT, () => console.log(`Server listening on ${PORT}`));
+
+  io.on('connection', (socket) => {
+    console.log('socket connected', socket.id);
+    socket.on('joinRoom', (roomId) => { socket.join('room_' + roomId); });
+    socket.on('leaveRoom', (roomId) => { socket.leave('room_' + roomId); });
+  });
   startScheduler();
 }
 
