@@ -34,6 +34,7 @@ export const api = {
     list: () => request('/sessions'),
     get: (id: string) => request('/sessions/' + id)
   },
+  // ...existing code...
   blackjackrooms: {
     list: () => request('/blackjackrooms'),
     create: (data: any) => request('/blackjackrooms', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data) }),
@@ -41,10 +42,11 @@ export const api = {
     get: (id: string) => request(`/blackjackrooms/${id}`),
     leave: (id: string) => request(`/blackjackrooms/${id}/leave`, { method: 'POST', headers: { ...authHeader() } }),
     ready: (id: string, data?: any) => request(`/blackjackrooms/${id}/ready`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data || {}) }),
-    unready: (id: string) => request(`/blackjackrooms/${id}/unready`, { method: 'POST', headers: { ...authHeader() } })
-    ,
-    action: (id: string, data: any) => request(`/blackjackrooms/${id}/action`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data || {}) })
+    unready: (id: string) => request(`/blackjackrooms/${id}/unready`, { method: 'POST', headers: { ...authHeader() } }),
+    // ADDED: server supports POST /blackjackrooms/:id/action
+    action: (id: string, data?: any) => request(`/blackjackrooms/${id}/action`, { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data || {}) })
   },
+  // ...existing code...
   bacayrooms: {
     list: () => request('/bacayrooms'),
     create: (data: any) => request('/bacayrooms', { method: 'POST', headers: { 'Content-Type': 'application/json', ...authHeader() }, body: JSON.stringify(data) }),
